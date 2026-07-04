@@ -1,0 +1,14 @@
+- id: AmourAngelsPerf
+  name: AmourAngels Performer
+  version: e459415
+  date: 2026-07-04 00:05:29
+  path: AmourAngelsPerf.zip
+  sha256: 38809cced58ea621ed9d6c8608a88efa9694ab32c95ff2d87b5fd3cb37b5b499
+
+- id: GirlsDelta
+  name: GirlsDelta
+  version: aa0e705
+  date: 2026-07-04 02:50:05
+  path: GirlsDelta.zip
+  sha256: 59ae4163c94c85026973d087a45890f8f8b842c2c163fc13599f9c8deac2fc58
+
