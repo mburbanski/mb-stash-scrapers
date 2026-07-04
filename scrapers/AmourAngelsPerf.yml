@@ -1,0 +1,51 @@
+name: AmourAngels Performer
+performerByURL:
+  - action: scrapeXPath
+    url:
+      - amourangels.com/z_model
+    scraper: performerScraper
+
+xPathScrapers:
+  performerScraper:
+    common:
+      $imageBase: //td[contains(@class,"modelinfo-bg")][1]/table/tbody/tr/td[1]
+      $infoBase: //td[contains(@class,"modelinfo-bg")][1]/table/tbody/tr/td[2]
+
+    performer:
+      Image:
+        selector: $imageBase/p/img/@src
+        postProcess:
+          - replace:
+              - regex: (.*)
+                with: https://amourangels.com$1
+
+      Name:
+        selector: $infoBase/*/b[contains(text(),"Name:")]/following-sibling::text()
+
+      Disambiguation:
+        selector: $infoBase/*/b[contains(text(),"ID:")]
+        postProcess:
+          - replace:
+              - regex: (ID:\ )
+                with: "Amour Angels #"
+
+      Gender:
+        fixed: Female
+
+      Country:
+        selector: $infoBase/*/b[contains(text(),"Country:")]/following-sibling::text()
+
+      HairColor:
+        selector: $infoBase/*/b[contains(text(),"Hair Color:")]/following-sibling::text()
+
+      EyeColor:
+        selector: $infoBase/*/b[contains(text(),"Eye Color:")]/following-sibling::text()
+
+      Measurements:
+        selector: $infoBase/*/b[contains(text(),"Bra size:")]/following-sibling::text()
+
+      Details:
+        selector: $infoBase/p[3]/text()
+        concat: "\n\n"
+
+# Last Updated March 29, 2024
