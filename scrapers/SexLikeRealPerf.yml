@@ -1,0 +1,62 @@
+name: SexLikeReal Performers
+performerByURL:
+  - action: scrapeXPath
+    url:
+      - sexlikereal.com/pornstars
+    scraper: performerScraper
+
+xPathScrapers:
+
+  performerScraper:
+  
+    common:
+      $baseModelHeader: //div[contains(@class,"c-meta-model-header")]
+      $baseModelPoster: //div[contains(@class,"c-meta-model-poster")]
+      $baseModelInfo:   //div[contains(@class,"c-meta-model-info")]
+
+    performer:
+      Image:
+        selector: $baseModelPoster/div/img/@data-src
+        postProcess:
+          - replace:
+            - regex: ^(.*?)(-small)(.*?)$
+              with: $1$3
+
+      Name: 
+        selector: $baseModelPoster/div/img/@title
+
+      Disambiguation:
+        fixed: SexLikeReal
+
+      Aliases:
+        selector: $baseModelInfo//div[@data-qa="model-info-aliases"]/div[2]
+
+#      Gender:
+#        fixed: Female
+
+      Birthdate: 
+        selector: $baseModelInfo//div[@data-qa="model-info-birth"]/div[2]
+        parseDate: January 2, 2006
+
+      Country:
+        selector: $baseModelInfo//div[@data-qa="model-info-country"]/div[2]
+
+      Height:
+        selector: $baseModelInfo//div[@data-qa="model-info-height"]/div[2]
+        postProcess:
+          - replace:
+            - regex: ^(.*?)(\d+).[Cc][Mm](.*?)$
+              with: $2
+
+      Weight:
+        selector: $baseModelInfo//div[@data-qa="model-info-weight"]/div[2]
+        postProcess:
+          - replace:
+            - regex: ^(.*?)(\d+).[Kk][Gg](.*?)$
+              with: $2
+
+      Details:
+        selector: $baseModelInfo//div[@data-qa="model-info-bio"]/div[2]
+        concat: "\n\n"
+
+# Last Updated August 18, 2024
