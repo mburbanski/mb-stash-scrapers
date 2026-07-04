@@ -1,24 +1,12 @@
-# Template for creating Stash scrapers source index
+# MB's Stash Scrapers
 
-This template allows you to create a new repository with a few clicks with preconfigured GitHub action to publish your scrapers source index. 
-_This assumes you already know how to create scrapers for Stash. If you don't, first read [this](https://docs.stashapp.cc/in-app-manual/scraping/scraperdevelopment/)._
+Everything here is strictly for my personal use. There are no guarantees anything in here will work for you in the way that you want. Nevertheless, feel free to poke around and use what you are interested in. If you have any enhancements, feel free to send a PR.
 
-## How to use it?
+Copied from the [scrapers-repo-template](https://github.com/stashapp/scrapers-repo-template)
 
-1. Click **Use this template** > **Create a new repository**. 
-1. Choose a repository name and click **Create repository**.
-1. Open **Settings** and head to **Pages**.
-1. Under Build and deployment select the Source as GitHub Actions.
-
-Now add your scrapers to [scrapers](/scrapers) directory and they will be automatically published to the source index.
-
-Source index URL: [`https://<your-username>.github.io/<repository-name>/main/index.yml`](https://<your-username>.github.io/<repository-name>/main/index.yml)
-
-## Share your scrapers
-
-- [Create a new topic](https://discourse.stashapp.cc/t/-/146) for your scraper on the community forum.
-- [Add your source index to the list](https://discourse.stashapp.cc/t/-/834) on the Stash community forum.
+- Main scraper index url: [https://mburbanski.github.io/mb-stash-scrapers/main/index.yml](https://mburbanski.github.io/mb-stash-scrapers/main/index.yml)
+- Dev scraper index url: [https://mburbanski.github.io/mb-stash-scrapers/dev/index.yml](https://mburbanski.github.io/mb-stash-scrapers/dev/index.yml)
 
 ## License
 
-The default license is set to [AGPL-3.0](/LICENCE). Before publishing any scrapers you can change it.
+The license is set to [AGPL-3.0](/LICENCE). 
