@@ -1,0 +1,162 @@
+name: GirlsDelta
+
+# Loads in headless chrome and scrapes THAT page rather
+# than what comes straight from the HTTP request. Needed
+# becuase the language (jp/en) seems to be dynamically set
+# on load rather than returned by the server directly.
+driver:
+  useCDP: true
+
+########################################
+# Scraper Actions & URLs
+########################################
+
+performerByURL:
+  - action: scrapeXPath
+    url:
+      - girlsdelta.com/model
+      - girlsdelta.com/en/model
+      - girlsdelta.com/jp/model
+    scraper: performerScraper
+
+sceneByURL:
+  - action: scrapeXPath
+    url:
+      - girlsdelta.com/product/
+      - girlsdelta.com/en/product/
+      - girlsdelta.com/jp/product/
+    scraper: sceneScraper
+
+galleryByURL:
+  - action: scrapeXPath
+    url:
+      - girlsdelta.com/product/
+      - girlsdelta.com/en/product/
+      - girlsdelta.com/jp/product/
+    scraper: galleryScraper
+
+########################################
+# Specific Scrapers
+########################################
+
+xPathScrapers:
+
+
+  performerScraper:
+  
+    common:
+      $urlJp:     //link[contains(@hreflang,"ja")]/@href
+      $urlEn:     //link[contains(@hreflang,"en")]/@href
+      $modelHead: //h3[contains(@class,"model-head")]
+
+    performer:
+      Image:
+        selector: $urlEn
+        postProcess:
+          - replace:
+              - regex: (https:\/\/girlsdelta\.com\/en\/model\/)(\d+)
+                with: https://girlsdelta.com/pics/model/$2/model_right.jpg
+
+      Name: 
+        selector: $modelHead/span[contains(@class,"name")]
+
+      Disambiguation:
+        selector: $urlEn
+        postProcess:
+          - replace:
+              - regex: (https:\/\/girlsdelta\.com\/en\/model\/)
+                with: "GirlsDelta #"
+
+      Aliases:
+        selector: $urlJp
+        subScraper:
+          selector: //div[contains(@class,"prod-name")]/text()
+
+      Gender:
+        fixed: Female
+
+      Country:
+        fixed: Japan
+
+      Measurements:
+        selector: $modelHead/span[contains(@class,"size")]
+
+      URL:
+        selector: $urlEn
+
+      Details:
+        selector: $modelHead/following-sibling::p[contains(@class,"search-description")]/text()
+
+      Tags:
+        Name: //p[contains(@class,"list-category")]/a/text()
+
+
+
+
+  sceneScraper:
+    common:
+      $urlJp:       //link[contains(@hreflang,"ja")]/@href
+      $urlEn:       //link[contains(@hreflang,"en")]/@href
+      $productTabs: //div[contains(@id,"product-tabs")]
+
+    scene:
+      Title: //div[contains(@class,"prod-name")]/text()
+
+      Code:
+        selector: $urlEn
+        postProcess:
+          - replace:
+              - regex: (https:\/\/girlsdelta\.com\/en\/product\/)
+                with: ""
+
+      URL:
+        selector: $urlEn
+
+      Performers:
+        Name: //*[@id="product-detail"]/div/div[3]/ul/li[1]/p/a/text()
+        URL:
+          selector: //*[@id="product-detail"]/div/div[3]/ul/li[1]/p/a/@href
+                  
+      Tags:
+        Name: //*[@id="product-detail"]/div/div[1]/ul/li[5]/h4/following-sibling::p/a
+
+      Image: //*[@id="main-video"]/@poster
+      
+      Details:
+        selector: //*[@id="model-interview"]/descendant::*/text()
+        concat: "\n"
+
+
+  galleryScraper:
+    common:
+      $urlJp:       //link[contains(@hreflang,"ja")]/@href
+      $urlEn:       //link[contains(@hreflang,"en")]/@href
+      $productTabs: //div[contains(@id,"product-tabs")]
+
+    gallery:
+      Title: //div[contains(@class,"prod-name")]/text()
+
+      Code:
+        selector: $urlEn
+        postProcess:
+          - replace:
+              - regex: (https:\/\/girlsdelta\.com\/en\/product\/)
+                with: ""
+
+      URL:
+        selector: $urlEn
+
+      Performers:
+        Name: //*[@id="product-detail"]/div/div[3]/ul/li[1]/p/a/text()
+        URL:
+          selector: //*[@id="product-detail"]/div/div[3]/ul/li[1]/p/a/@href
+
+      Tags:
+        Name: //*[@id="product-detail"]/div/div[1]/ul/li[5]/h4/following-sibling::p/a
+
+      Details:
+        selector: //*[@id="model-interview"]/descendant::*/text()
+        concat: "\n"
+
+
+# Last Updated May 06, 2024
