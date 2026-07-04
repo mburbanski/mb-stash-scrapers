@@ -1,0 +1,11 @@
+name: "+ Translate"
+# requires: py_common
+
+sceneByFragment:
+  action: script
+  script:
+      - python
+      - Translate.py
+      - sceneByFragment
+
+# Last Updated Jul 02, 2026
