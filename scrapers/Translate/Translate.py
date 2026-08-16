@@ -8,10 +8,13 @@ CONFIG_FILE = 'config.py'
 DEFAULT_CONFIG_FILE = 'default_config.py'
 
 def load_config(file_path):
-    global LLM_URL, MODEL, PROMPT_TEMPLATE
+    global LLM_URL, MODEL, PROMPT_TEMPLATE, API_KEY
     if os.path.exists(file_path):
         with open(file_path, 'r') as f:
             exec(f.read(), globals())
+
+# Sensible fallback in case an older config.py predates the API_KEY setting
+API_KEY = ""
 
 # Load configurations from default_config.py, then config.py
 # This allows local settings to override default settings
@@ -27,15 +30,19 @@ def translate(text):
     prompt = build_prompt(text)
     payload = {
         "model": MODEL,
-        "prompt": prompt,
+        "messages": [
+            {"role": "user", "content": prompt}
+        ],
         "stream": False,
         "temperature": 0.7,    # slightly higher for more natural language
         "top_p": 0.6,          # allows colloquial phrasing without losing accuracy
-        "top_k": 20,
     }
-    r = requests.post(LLM_URL, json=payload)
+    headers = {}
+    if API_KEY:
+        headers["Authorization"] = f"Bearer {API_KEY}"
+    r = requests.post(LLM_URL, json=payload, headers=headers)
     try:
-        return r.json().get("response", text).strip()
+        return r.json()["choices"][0]["message"]["content"].strip()
     except Exception:
         return text
 
