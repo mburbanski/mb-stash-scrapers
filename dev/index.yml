@@ -3,28 +3,28 @@
   version: e459415
   date: 2026-07-04 00:05:29
   path: AmourAngelsPerf.zip
-  sha256: 1d7c2739ec977553b4fa638b432591b1d4d194d26b6c491cc9e19b7fa2e0417b
+  sha256: 6d36d2bf6d5a0ea32f1511041967484c8611c1df3f32f8291d1dd407ab1fc30e
 
 - id: GirlsDelta
   name: GirlsDelta
   version: 0eb96f5
   date: 2026-07-04 02:50:05
   path: GirlsDelta.zip
-  sha256: abf76a36995d7551563ac861da1e6d5bd9ab7693a31d92d52117dff4d8652552
+  sha256: c0430943b3383a644f459ff80ead803154590a6a5a93513a14d577b3512fb0dc
 
 - id: SexLikeRealPerf
   name: SexLikeReal Performers
   version: 6cdb11d
   date: 2026-07-04 02:53:37
   path: SexLikeRealPerf.zip
-  sha256: a2b315604cdb561128728943f633fe33bf2916113b8eee2b6179c41efbbca63b
+  sha256: 7682bce41b405eb0d18036ed398767371133a6b6a27e864489b2d05763af125e
 
 - id: Translate
   name: + Translate
-  version: 69469d6
-  date: 2026-08-16 17:26:38
+  version: 10e645a
+  date: 2026-08-16 23:30:24
   path: Translate.zip
-  sha256: 57c45566595907e17069d18bfb1c1bda44d9c9b3f48e71cdd9304ac46fd8e90b
+  sha256: 9b68e0d5d34b7d9fbff9a22dd51e7c3a490512993acec4df5bac6a18485e8046
   requires:
     - py_common
 
